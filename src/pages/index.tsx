@@ -26,14 +26,14 @@ export default function IndexPage() {
           rounded-md shadow border border-gray-200"
       >
         <div className="text-center">
-          {/* <div className="my-s-4 flex justify-center">
-            <img src="/img/sote_logo.svg" alt="MaziMob" className="h-10 w-auto" />
-          </div> */}
+         <div className="my-s-4 flex justify-center">
+            <img src="https://www.mazimobility.com/images/mazi_logo.png" alt="MaziMob" className="h-10 w-auto" />
+          </div> 
 
           <h1 className="font-bold text-3xl text-slate-600 mb-s-1">Welcome to MaziMob</h1>
         </div>
 
-        {!user.forcePasswordChange && !forgotPass && (
+        {!forgotPass && (
           <Login validationFailed={validationFailed} forgotPassword={() => setForgotPass(true)} />
         )}
 
