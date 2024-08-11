@@ -1,5 +1,5 @@
-import { DeviceData } from "../interfaces/deviceData";
-import { DeviceSummary } from "../interfaces/summary";
+import { DeviceData } from "../../interfaces/deviceData";
+import { DeviceSummary } from "../../interfaces/summary";
 const baseUrl = 'https://75sofxo9jj.execute-api.us-east-1.amazonaws.com/prod';
 export function fetchDeviceData(deviceId: string): Promise<DeviceData> {
     return new Promise<DeviceData>((resolve, reject) => {

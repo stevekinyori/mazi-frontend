@@ -1,2 +1,2 @@
 export * from './auth/auth';
-export * from './api'
+export * from './serverless/api'
