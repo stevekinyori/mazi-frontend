@@ -1,6 +1,6 @@
 import { useMutation } from 'react-query';
-import { fetchDeviceData, fetchDeviceSummary, postMessageToSQS, fetchItems, filterByDeviceId } from '../../api/api';
 import { QueryArgs } from '../../interfaces';
+import { fetchDeviceData, fetchDeviceSummary, fetchItems, filterByDeviceId, postMessageToSQS } from '../../api';
 
 export const useFetchDeviceDataMutation = ({ onError, onSuccess }: QueryArgs) => {
   return useMutation({

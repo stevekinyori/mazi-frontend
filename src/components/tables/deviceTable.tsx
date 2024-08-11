@@ -1,7 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useMemo } from 'react';
 import { Card, Table } from 'antd';
 import { AppContext, formatDateTime } from '../../helpers';
 import { useFetchDeviceDataMutation } from '../../queries/api/api';
+import { DeviceData } from '../../interfaces';
 
 interface DeviceListProps {
   deviceId: string | undefined;
@@ -9,7 +10,7 @@ interface DeviceListProps {
 
 export default function DeviceListById({ deviceId }: DeviceListProps) {
   const { contentLoaded } = useContext(AppContext);
-  const [deviceData, setDeviceData] = useState([]);
+  const [deviceData, setDeviceData] = useState<Array<DeviceData>>([]);
   const [dataPagination, setDataPagination] = useState({
     recordCount: 10,
     recordOffset: 0,
@@ -38,20 +39,37 @@ export default function DeviceListById({ deviceId }: DeviceListProps) {
       render: (item) => item.location?.longitude || '-',
     },
     {
-      title: 'Speed (km/h)',
-      key: 'speed',
-      dataIndex: 'speed',
-    },
-    {
-      title: 'Temperature (°C)',
-      key: 'temperature',
-      dataIndex: 'temperature',
-    },
-    {
-      title: 'Status',
-      key: 'status',
-      dataIndex: 'status',
-    },
+        title: "Speed (km/h)",
+        key: "speed",
+        dataIndex: "speed",
+        render:(item)=> parseFloat(item).toFixed(2)
+      },
+      {
+        title: "Temperature (°C)",
+        key: "temperature",
+        dataIndex: "temperature",
+        render:(item)=> parseFloat(item).toFixed(2)
+      },
+      {
+        title: "Status",
+        key: "status",
+        dataIndex: "status",
+        render: (item) => {
+          if (item === "active") {
+            return (
+              <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+                {item}
+              </span>
+            );
+          } else {
+            return (
+              <span className="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
+                {item}
+              </span>
+            );
+          }
+        },
+      },
     {
       title: 'Battery Health Status',
       key: 'batteryHealthStatus',
@@ -68,10 +86,7 @@ export default function DeviceListById({ deviceId }: DeviceListProps) {
 
   const { mutate: fetchDeviceData } = useFetchDeviceDataMutation({
     onSuccess: (data) => {
-      const orderedData = data.sort(
-        (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-      );
-      setDeviceData(orderedData);
+      setDeviceData(data);
     },
     onError: (error) => {
       console.error('Error fetching device data:', error);
@@ -79,11 +94,23 @@ export default function DeviceListById({ deviceId }: DeviceListProps) {
     },
   });
 
+  const sortedData = useMemo(() => {
+    return deviceData.sort(
+      (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+    );
+  }, [deviceData]);
+
   useEffect(() => {
     if (deviceId) {
       fetchDeviceData(deviceId);
+
+      const intervalId = setInterval(() => {
+        fetchDeviceData(deviceId);
+      }, 1000);
+
+      return () => clearInterval(intervalId);
     }
-  }, [deviceId]);
+  }, [deviceId])
 
   return (
     <div className="my-s-3">
