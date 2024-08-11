@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+  color: #333;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.ant-picker-cell {
+  @apply font-semibold #{!important};
+
+  &.ant-picker-cell-range-start, &.ant-picker-cell-range-end, &.ant-picker-cell-selected {
+    @apply text-gray-50 #{!important};
+
+    & > div {
+      @apply bg-[#337ab7] rounded drop-shadow-lg #{!important};
+    }
+
+    &::before {
+      @apply bg-[#337ab7]/20 #{!important};
+    }
+  }
+
+  &.ant-picker-cell-in-range {
+    @apply text-[#337ab7] #{!important};
+
+    &::before {
+      @apply bg-[#337ab7]/20 #{!important};
+    }
+  }
+
+  &.ant-picker-cell-today {
+    & > div {
+      &::before {
+        @apply border-[#337ab7] #{!important};
+      }
+    }
+  }
+
+  &.ant-picker-cell-range-hover,
+  &.ant-picker-cell-range-hover-start,
+  &.ant-picker-cell-range-hover-end,
+  &.ant-picker-cell-range-hover-edge-start,
+  &.ant-picker-cell-range-hover-edge-end {
+    &::after {
+      border-color: #337ab7 !important;
+    }
+  }
+}
+
+.ant-picker-presets {
+  @apply p-s-1;
+
+  ul > li {
+    @apply font-medium py-0.5 #{!important};
+
+    &:hover {
+      @apply bg-[#337ab7]/20 text-[#337ab7] #{!important};
+    }
+  }
+}
+
+.ant-picker-header-view > button {
+  @apply px-s-1.5 font-bold relative #{!important};
+
+  &:hover {
+    @apply text-[#337ab7] #{!important};
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    right: -5px;
+    bottom: 10px;
+    border-width: 5px;
+    border-style: solid;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: #337ab7;
+    transform: rotate(45deg);
+    pointer-events: none;
+  }
+}
+
+.ant-picker-header > button {
+  @apply text-gray-500 #{!important};
+
+  &:hover {
+    @apply text-gray-800 #{!important};
+  }
+}
+
+.ant-switch {
+  @apply bg-gray-400/80 #{!important};
+
+  &.ant-switch-checked {
+    background: #337ab7 !important;
+  }
+}
+
+.loading-chart {
+  position: relative;
+
+  &::before {
+    content: 'Refreshing...';
+    @apply inset-0 absolute bg-gray-50/50 z-10 flex items-center justify-center text-xl text-gray-500;
+  }
+}
+
+.timeline-steps {
+  .ant-steps-item-finish .ant-steps-item-tail::after {
+    @apply bg-green-500 #{!important};
+  }
+
+  .ant-steps-item-content {
+    margin-top: 0 !important;
+
+    & > div {
+      line-height: 1.2;
+      font-weight: 500;
+    }
+  }
+}

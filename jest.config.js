@@ -1,0 +1,6 @@
+/** @type {import('jest').Config} */
+module.exports = {
+  // ...
+  setupFilesAfterEnv: ["jest-canvas-mock"],
+  // ...
+};

@@ -1,0 +1,108 @@
+{
+  "name": "MaziMob",
+  "version": "v2023.40.4",
+  "private": true,
+  "scripts": {
+    "postinstall": "rm -rf node_modules/.vite",
+    "start": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "tsc && vite preview",
+    "check": "tsc",
+    "test": "react-scripts test --coverage --watchAll",
+    "test-ci": "react-scripts test --coverage --watchAll=false",
+    "lint": "eslint --ext '.js,.ts,.jsx,.tsx' src",
+    "lint:fix": "npm run lint -- --fix",
+    "lint:file": "eslint --ext '.js,.ts,.jsx,.tsx'",
+    "lint:file:fix": "npm run lint:file -- --fix",
+    "prepare": "husky install"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@tailwindcss/container-queries": "^0.1.1",
+    "amazon-cognito-identity-js": "^6.2.0",
+    "antd": "^5.5.0",
+    "chart.js": "^4.3.0",
+    "dayjs": "^1.11.12",
+    "file-saver": "^2.0.5",
+    "file-type": "^19.3.0",
+    "lodash.camelcase": "^4.3.0",
+    "lodash.debounce": "^4.0.8",
+    "lodash.groupby": "^4.6.0",
+    "lodash.random": "^3.2.0",
+    "lodash.startcase": "^4.4.0",
+    "lodash.uniqby": "^4.7.0",
+    "mixpanel-browser": "^2.47.0",
+    "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.2.1",
+    "react-pdf": "^7.3.3",
+    "react-query": "^3.39.3",
+    "react-router-dom": "^6.11.1",
+    "remixicon-react": "^1.0.0",
+    "web-vitals": "^3.3.1",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/file-saver": "^2.0.5",
+    "@types/jest": "^29.5.1",
+    "@types/node": "^20.1.7",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "@vitejs/plugin-react": "^4.0.0",
+    "assert": "^2.0.0",
+    "autoprefixer": "^10.4.14",
+    "browserify-zlib": "^0.2.0",
+    "dotenv": "^16.0.3",
+    "envalid": "^7.3.1",
+    "eslint": "^8.40.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "https-browserify": "^1.0.0",
+    "husky": "^8.0.3",
+    "jest-canvas-mock": "^2.5.0",
+    "postcss": "^8.4.23",
+    "process": "^0.11.10",
+    "react-scripts": "^5.0.1",
+    "rollup-plugin-node-polyfills": "^0.2.1",
+    "sass": "^1.62.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "tailwindcss": "^3.3.2",
+    "ts-interface-checker": "^1.0.2",
+    "typescript": "^4.9.5",
+    "vite": "^4.3.7"
+  },
+  "peerDependencies": {
+    "@headlessui/react": "^1.7.14",
+    "date-fns": "^2.30.0",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/reportWebVitals.ts"
+    ]
+  }
+}

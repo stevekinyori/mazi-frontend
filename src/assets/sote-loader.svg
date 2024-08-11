@@ -1,0 +1,27 @@
+<svg width="70" height="30" viewBox="0 0 70 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <mask id="mask">
+            <rect x="0" y="0" width="70" height="32" rx="11" fill="white" />
+
+            <rect id="gap" width="70" height="6" x="0" y="13" fill="black">
+                <animateTransform
+                    attributeType="xml"
+                    attributeName="transform"
+                    type="rotate"
+                    from="0 35 15"
+                    to="360 35 15"
+                    dur="1s"
+                    additive="sum"
+                    repeatCount="indefinite"
+                />
+            </rect>
+        </mask>
+
+        <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#f1491c" />
+            <stop offset="100%" stop-color="#d92f23" />
+        </linearGradient>
+    </defs>
+
+    <rect x="5" y="5" width="60" height="22" rx="11" fill="transparent" stroke="url(#bg)" stroke-width="6" mask="url(#mask)" />
+</svg>
