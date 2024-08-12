@@ -4,10 +4,12 @@ import { AppContext, formatDateTime } from "../../helpers";
 import { useFetchItemsMutation } from "../../queries/api/api";
 import { Link } from "react-router-dom";
 import { DeviceData } from "../../interfaces";
+import AppLoader from "../shared/AppLoader";
 
 export default function DeviceList() {
   const { contentLoaded } = useContext(AppContext);
   const [deviceData, setDeviceData] = useState<Array<DeviceData>>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [dataPagination, setDataPagination] = useState({
     recordCount: 10,
     recordOffset: 0,
@@ -101,28 +103,33 @@ export default function DeviceList() {
         (a, b) =>
           new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
       );
+      setIsLoading(false);
       setDeviceData(orderedData);
     },
     onError: (error) => {
+      setIsLoading(false);
       console.error("Error fetching device data:", error);
       contentLoaded((prevState) => ({ ...prevState, error }));
     },
   });
 
   useEffect(() => {
+    setIsLoading(true);
     fetchDeviceData();
-
+    
     const intervalId = setInterval(() => {
       fetchDeviceData();
     }, 1000);
 
     return () => clearInterval(intervalId);
   }, []);
-
+  if(isLoading){
+    return <AppLoader message="Loading Data..."></AppLoader>
+  }
   return (
     <div className="my-s-3">
       <h2 className="text-xl font-semibold mb-s-1">Device Data</h2>
-        
+
       <Card bodyStyle={{ padding: "0" }}>
         <Table
           columns={columns}

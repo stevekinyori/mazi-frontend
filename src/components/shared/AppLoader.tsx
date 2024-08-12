@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Loader from '../../assets/sote-loader.svg';
+import Loader from '../../assets/loader.svg';
 
 export default function AppLoader({ message, small }: { message?: string; small?: boolean }) {
   return (

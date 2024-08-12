@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import LargeTotalsCard from '../shared/TotalsCard'; // Adjust the import path accordingly
-import { useFetchDeviceSummaryMutation } from '../../queries/api/api';
-import DeviceIcon from 'remixicon-react/DeviceLineIcon';
-import BatteryLineIcon from 'remixicon-react/BatteryLineIcon';
-import ThermometerLineIcon from 'remixicon-react/ThermometerLineIcon';
-import SpeedLineIcon from 'remixicon-react/SpeedLineIcon';
-import BatteryLowLineIcon from 'remixicon-react/BatteryLowLineIcon';
-import AlertLineIcon from 'remixicon-react/AlertLineIcon';
-import { DeviceSummary } from '../../interfaces/summary';
+import React, { useEffect, useState } from "react";
+import LargeTotalsCard from "../shared/TotalsCard"; // Adjust the import path accordingly
+import { useFetchDeviceSummaryMutation } from "../../queries/api/api";
+import DeviceIcon from "remixicon-react/DeviceLineIcon";
+import BatteryLineIcon from "remixicon-react/BatteryLineIcon";
+import ThermometerLineIcon from "remixicon-react/ThermometerLineIcon";
+import SpeedLineIcon from "remixicon-react/SpeedLineIcon";
+import BatteryLowLineIcon from "remixicon-react/BatteryLowLineIcon";
+import AlertLineIcon from "remixicon-react/AlertLineIcon";
+import { DeviceSummary } from "../../interfaces/summary";
 
 export default function SummaryDashboard() {
   const [summaryData, setSummaryData] = useState<DeviceSummary | null>(null);
@@ -19,24 +19,68 @@ export default function SummaryDashboard() {
       setLoading(false);
     },
     onError: (error) => {
-      console.error('Error fetching summary data:', error);
+      console.error("Error fetching summary data:", error);
       setLoading(false);
     },
   });
 
   useEffect(() => {
-    fetchDeviceSummary();
+    const intervalId = setInterval(() => {
+      fetchDeviceSummary();
+    }, 1000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   const cardData = [
-    { total: summaryData?.totalDevices ?? 0, label: 'Total Devices', icon: <DeviceIcon />, loading },
-    { total: summaryData?.activeDevices ?? 0, label: 'Active Devices', icon: <DeviceIcon style={{ color: 'green' }}/>, loading },
-    { total: summaryData?.lowBatteryDevices ?? 0, label: 'Low Battery Devices', icon: <BatteryLowLineIcon style={{ color: 'red' }}/>, loading },
-    { total: summaryData?.redZoneDevices ?? 0, label: 'Red Zone Devices', icon: <AlertLineIcon style={{ color: 'red' }}/>, loading },
-    { total: summaryData?.highTempDevices ?? 0, label: 'High Temperature Devices', icon: <ThermometerLineIcon style={{ color: 'red' }}/>, loading },
-    { total: summaryData?.highSpeedDevices ?? 0, label: 'High Speed Devices', icon: <SpeedLineIcon />, loading },
-    { total: summaryData?.batteryHealthGrouping?.good ?? 0, label: 'Good Battery Health', icon: <BatteryLineIcon style={{ color: 'green' }}/>, loading },
-    { total: summaryData?.batteryHealthGrouping?.poor ?? 0, label: 'Poor Battery Health', icon: <BatteryLowLineIcon style={{ color: 'red' }}/>, loading },
+    {
+      total: summaryData?.totalDevices ?? 0,
+      label: "Total Devices",
+      icon: <DeviceIcon />,
+      loading,
+    },
+    {
+      total: summaryData?.activeDevices ?? 0,
+      label: "Active Devices",
+      icon: <DeviceIcon style={{ color: "green" }} />,
+      loading,
+    },
+    {
+      total: summaryData?.lowBatteryDevices ?? 0,
+      label: "Low Battery Devices",
+      icon: <BatteryLowLineIcon style={{ color: "red" }} />,
+      loading,
+    },
+    {
+      total: summaryData?.redZoneDevices ?? 0,
+      label: "Red Zone Devices",
+      icon: <AlertLineIcon style={{ color: "red" }} />,
+      loading,
+    },
+    {
+      total: summaryData?.highTempDevices ?? 0,
+      label: "High Temperature Devices",
+      icon: <ThermometerLineIcon style={{ color: "red" }} />,
+      loading,
+    },
+    {
+      total: summaryData?.highSpeedDevices ?? 0,
+      label: "High Speed Devices",
+      icon: <SpeedLineIcon />,
+      loading,
+    },
+    {
+      total: summaryData?.batteryHealthGrouping?.good ?? 0,
+      label: "Good Battery Health",
+      icon: <BatteryLineIcon style={{ color: "green" }} />,
+      loading,
+    },
+    {
+      total: summaryData?.batteryHealthGrouping?.poor ?? 0,
+      label: "Poor Battery Health",
+      icon: <BatteryLowLineIcon style={{ color: "red" }} />,
+      loading,
+    },
   ];
 
   return (
