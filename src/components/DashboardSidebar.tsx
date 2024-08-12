@@ -19,7 +19,7 @@ export default function DashboardSidebar({ menuItems, selectedMenuItems, logout 
     <div className="h-full flex flex-col justify-between">
       <div>
         <div className="flex justify-center py-s-4 border-b border-gray-200">
-          <img src="/img/sote_logo.svg" alt="MaziMob" className="w-1/2" />
+          <img src="/img/mazi_logo.svg" alt="MaziMob" className="w-1/2" />
         </div>
 
         <Menu
